@@ -1,0 +1,33 @@
+name: Unblock GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/unblock-pages.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+jobs:
+  cancel-stalled-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel the old deployment blocking the Electra fix
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const deploymentId = 'c186d502845ab80f00ccd9bb48e0dedf764e3c0f';
+            try {
+              const {data} = await github.request('GET /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}', {
+                ...context.repo, pages_deployment_id: deploymentId
+              });
+              core.info('Old Pages deployment status: ' + data.status);
+              if (!['succeed', 'succeeded', 'success', 'failed', 'cancelled', 'canceled', 'deployment_cancelled', 'deployment_failed'].includes(data.status)) {
+                await github.request('POST /repos/{owner}/{repo}/pages/deployments/{pages_deployment_id}/cancel', {
+                  ...context.repo, pages_deployment_id: deploymentId
+                });
+                core.info('Cancellation requested. Retry the latest Pages deployment.');
+              }
+            } catch (error) {
+              if (error.status === 404) core.info('Old deployment no longer exists.');
+              else throw error;
+            }
