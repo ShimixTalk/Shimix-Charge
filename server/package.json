@@ -1,0 +1,1 @@
+{"name":"shimix-charge-sync","private":true,"type":"module","engines":{"node":">=24"},"scripts":{"start":"node server.mjs","test":"node --test sync.test.mjs"}}

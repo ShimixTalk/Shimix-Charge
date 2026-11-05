@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: shimix-charge-sync
+    runtime: node
+    plan: starter
+    region: frankfurt
+    rootDir: server
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    numInstances: 1
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 24
+      - key: DB_PATH
+        value: /var/data/charge.sqlite
+    disk:
+      name: charge-data
+      mountPath: /var/data
+      sizeGB: 1
