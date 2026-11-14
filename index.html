@@ -143,6 +143,31 @@ return {content,scanned}
 $('file').onchange=async e=>{let file=e.target.files?.[0];if(!file)return;let status=$('importStatus');pendingAttachment=null;status.textContent='Analyse de '+file.name+' en cours…';if(file.size<=700000){try{pendingAttachment={name:file.name,type:file.type,data:await new Promise((resolve,reject)=>{let reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=reject;reader.readAsDataURL(file)})}}catch(err){status.textContent='Impossible de conserver le justificatif.'}}
 try{let content='',scanned=[];if(file.type.startsWith('image/')){status.textContent='Reconnaissance de la photo en cours…';content=await recognizeImage(file)}else if(file.type==='application/pdf'){let pdf=await readPdf(file);content=pdf.content;scanned=pdf.scanned;for(let i=0;i<scanned.length;i++){status.textContent='Reconnaissance de la page scannée '+(i+1)+'/'+scanned.length+'…';content+='\\n'+await recognizeImage(scanned[i])}}else throw Error('Format non pris en charge');let found=parseText(content),fields=Object.entries(found).filter(x=>x[1]).map(x=>x[0]);let debug=$('importDebug');if(debug){debug.hidden=false;$('importRaw').value=content.slice(0,12000);$('importFields').textContent='Champs détectés : '+(fields.join(', ')||'aucun');}status.textContent=fields.length?'Informations extraites : '+fields.join(', ')+'. Vérifie et corrige avant de valider.':'Aucune information reconnue avec certitude. Complète les champs manuellement.';if(file.size>700000)status.textContent+=' Fichier trop volumineux pour être conservé (limite 700 Ko).'}catch(err){status.textContent='Reconnaissance indisponible : '+err.message+'. Complète les champs manuellement.'}};$('copyImport').onclick=()=>{let txt=$('importFields').textContent+'\n'+$('importRaw').value;navigator.clipboard?.writeText(txt).then(()=>$('importFields').textContent+=' — Copié').catch(()=>{$('importRaw').select();document.execCommand('copy')})};render();resetRechargeForm();window.addEventListener('pageshow',e=>{if(e.persisted)resetRechargeForm()});
 
+// Mise à jour automatique : contrôle la version publiée sans effacer le stockage local.
+const APP_VERSION='2026-11-14-auto-update-1';
+let updateCheckRunning=false,lastUpdateCheck=0;
+async function checkForUpdates(){
+ if(updateCheckRunning||!navigator.onLine||document.hidden||editingId||document.activeElement?.matches('input,textarea,select'))return;
+ if(Date.now()-lastUpdateCheck<60000)return;
+ lastUpdateCheck=Date.now();updateCheckRunning=true;
+ try{
+  const response=await fetch(new URL('./index.html?shimix_check='+Date.now(),location.href),{cache:'no-store'});
+  if(!response.ok)return;
+  const html=await response.text();
+  const match=html.match(/const APP_VERSION='([^']+)'/);
+  if(match&&match[1]!==APP_VERSION){
+   const url=new URL(location.href);url.searchParams.set('shimix_v',match[1]);
+   location.replace(url.href);
+  }
+ }catch(e){/* Hors ligne : conserver la version et les données actuelles. */}
+ finally{updateCheckRunning=false}
+}
+window.addEventListener('pageshow',()=>{checkForUpdates()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkForUpdates()});
+window.addEventListener('focus',checkForUpdates);
+setInterval(checkForUpdates,120000);
+checkForUpdates();
+
 const cloudURL='https://shimix-charge.shimixt.chatgpt.site';
 let cloudWindow=null,cloudNonce='';
 $('openCloud').onclick=()=>{
