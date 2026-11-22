@@ -236,7 +236,79 @@ body.theme-light .premium-side{border-radius:15px!important}
 body.theme-light .premium-side:nth-child(3){background:#ffffffad}
 body.theme-light .premium-range{background:#ffffffbd}
 @media(max-width:390px){.premium-theme-switch{margin-bottom:103px!important}body.theme-light .premium-theme-switch{margin-bottom:98px!important}.premium-side{min-height:120px!important}}
-</style></head><body><header><h1>⚡ SHIMIX Charge</h1><div class="small">Suivi personnel Tesla • données conservées sur cet appareil</div><div id="appVersionDisplay" class="small" style="margin-top:5px;color:#81e6ba;font-weight:700">Version 2026.11.22.16</div></header><main><div class="premium-top"><div class="premium-brand"><span>SHIMIX</span> <em>Charge</em></div><div class="premium-subtitle">MON ESPACE TESLA</div><div class="premium-theme-switch" role="group" aria-label="Choisir le thème"><button type="button" id="quickDark" aria-pressed="true">◐ Sombre</button><button type="button" id="quickLight" aria-pressed="false">☀ Clair</button></div><div class="premium-hero"><div class="premium-side"><span class="premium-icon">◷</span><small>Dernière recharge</small><strong id="heroDate">—</strong><small>Station</small><strong id="heroStation">—</strong></div><div class="premium-ring"><div class="premium-ring-inner"><span class="premium-bolt">ϟ</span><small>Énergie rechargée</small><strong id="heroEnergy">—</strong><small>Dernière recharge enregistrée</small></div></div><div class="premium-side"><span class="premium-icon">ϟ</span><small>Prix TTC</small><strong id="heroCost">—</strong><small>Prix au kWh</small><strong id="heroUnit">—</strong></div></div><div class="premium-range"><span>▣</span><span>Recharges enregistrées · sans API Tesla</span><strong id="heroCount">—</strong></div></div>
+
+/* SHIMIX V17: deux compositions réellement différentes, inspirées des images fournies */
+:root{
+  --shimix-reference-car:url("https://tesla-mag.ch/_next/image?dpl=dpl_7K19sbyRbfTuyW3to3ZteSy9SBG2&q=75&url=%2Fimages%2Fgenerated%2Farticles%2Ftesla-mag-ch-articles-tesla-model-3-highland-suisse-2026.jpg&w=1920");
+}
+body{background:#050b14}
+body>main{padding:0 14px 30px}
+.premium-top{margin:0 -14px 13px!important;padding:42px 14px 18px!important;border:0!important;border-bottom:1px solid #14293b!important;border-radius:0 0 30px 30px!important;min-height:610px!important;position:relative;isolation:isolate;background:#06101d!important;overflow:hidden}
+.premium-top::before{content:"";position:absolute;inset:118px 0 auto 0!important;height:360px;background-image:var(--shimix-car-image,var(--shimix-reference-car));background-repeat:no-repeat;background-size:cover!important;background-position:center center!important;filter:contrast(1.13) brightness(.76) saturate(.85);opacity:1!important;z-index:-2}
+.premium-top::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#06101d 0%,rgba(6,16,29,.22) 28%,rgba(6,16,29,.05) 49%,#06101d 83%);z-index:-1}
+.premium-brand{font-size:clamp(30px,7.5vw,43px);font-weight:900;font-style:italic;letter-spacing:-1px;line-height:1.1;text-shadow:0 2px 12px #000}
+.premium-subtitle{font-size:10px;letter-spacing:3px;margin:4px 0 0}
+.premium-theme-switch{position:absolute!important;top:105px;right:12px;margin:0!important;transform:none!important;z-index:4;background:#071425b0;scale:.76;transform-origin:top right}
+.premium-hero{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(150px,1.62fr) minmax(0,1fr)!important;gap:8px!important;align-items:end!important;margin-top:255px!important;min-height:190px!important}
+.premium-side{min-height:128px!important;max-height:155px;overflow:hidden;border-radius:16px;background:linear-gradient(140deg,rgba(29,48,66,.91),rgba(7,19,31,.93))!important;border:1px solid #4c6f8b70;backdrop-filter:blur(14px);padding:12px 8px;box-shadow:0 10px 24px #0007}
+.premium-side small{font-size:10px;line-height:1.25}
+.premium-side strong{max-height:45px;font-size:clamp(11px,2.6vw,15px);line-height:1.35;overflow:hidden;overflow-wrap:anywhere}
+.premium-side .premium-icon{font-size:20px}
+.premium-ring{align-self:center!important;padding:6px;background:conic-gradient(from 213deg,#073f84,#05a2ff 45%,#51e6ff 73%,#0d2941 75%,#0d2941);box-shadow:0 0 30px #009cff90,0 0 7px #008effbb}
+.premium-ring-inner{background:radial-gradient(circle at 50% 13%,#102e4a,#020a15 70%);border:1px solid #20465c}
+.premium-ring strong{font-size:clamp(16px,4vw,27px)!important}
+.premium-ring small{font-size:clamp(8px,2vw,11px);margin:4px 0}
+.premium-ring .premium-bolt{font-size:24px}
+.premium-range{font-size:11px;margin:20px 0 0!important;background:#10273cbb!important;border:1px solid #365975;border-radius:99px;min-height:46px}
+.premium-range strong{white-space:nowrap}
+.premium-nav{grid-template-columns:repeat(5,minmax(0,1fr));background:#0a1524;border:1px solid #25435a;border-radius:22px;box-shadow:0 6px 20px #0005;margin:8px 0 22px;padding:6px}
+.premium-nav button,.premium-nav button.secondary{min-height:66px;font-size:clamp(9px,2.25vw,12px);padding:6px 1px}
+.premium-nav button:not(.secondary){background:linear-gradient(145deg,#0c6ca7,#103854);color:#aeeaff;border-color:#16b0ff}
+.premium-nav button span{font-size:22px}
+.premium-recent{margin:0 0 25px}
+.premium-recent-heading strong{font-size:19px;color:#f7fbff}
+.premium-recent-item{background:linear-gradient(125deg,#11263d,#081a2b);border-color:#29475e;border-radius:16px;margin-bottom:9px;padding:11px}
+.premium-monthly{display:block;background:linear-gradient(120deg,#10283b,#071727);border:1px solid #25445a;color:#eaf6ff}
+.premium-monthly-heading,.premium-monthly-grid strong{color:#eaf6ff}
+.premium-monthly-grid span{color:#a5c4d9}
+.premium-monthly-grid>div{border-color:#29495e}
+
+/* Claire : composition de la seconde maquette, cercle à gauche, données à droite */
+body.theme-light{background:linear-gradient(180deg,#eef0f2,#e8e9ed)}
+body.theme-light .premium-top{min-height:568px!important;background:linear-gradient(180deg,#f5e6e2 0%,#e9edf1 85%)!important;border-color:#dbe0e6!important;padding-top:41px!important}
+body.theme-light .premium-top::before{inset:94px 0 auto 0!important;height:335px;background-position:center 49%!important;filter:brightness(1.04) saturate(.74) contrast(.99);opacity:.96!important}
+body.theme-light .premium-top::after{background:linear-gradient(180deg,rgba(245,233,230,.2) 0%,rgba(241,241,245,.08) 39%,rgba(234,238,243,.08) 56%,#e8edf2 82%)}
+body.theme-light .premium-brand{color:#10283b;text-shadow:0 1px 9px #fff}
+body.theme-light .premium-brand em{color:#37566d}
+body.theme-light .premium-subtitle{color:#415d70}
+body.theme-light .premium-theme-switch{background:#ffffffbf;border-color:#b9cbd8}
+body.theme-light .premium-hero{grid-template-columns:minmax(132px,1.17fr) minmax(0,1fr) minmax(0,1fr)!important;grid-template-rows:auto;gap:6px!important;align-items:center!important;margin-top:243px!important;min-height:170px!important}
+body.theme-light .premium-ring{grid-column:1;grid-row:1;width:100%;min-width:125px;padding:9px;box-shadow:0 12px 23px #678da466;background:conic-gradient(from 210deg,#a8b8c7 0%,#41ceff 28%,#8cf0ff 52%,#c5d4df 55%,#a2b1c0)}
+body.theme-light .premium-ring-inner{background:radial-gradient(circle at 35% 15%,#44535f,#1d2d3b 85%);box-shadow:inset 0 0 20px #1a2a30}
+body.theme-light .premium-ring strong{color:#fff}
+body.theme-light .premium-ring small{color:#e0eaf4}
+body.theme-light .premium-side{min-height:140px!important;border:0;background:rgba(255,255,255,.25)!important;box-shadow:none;backdrop-filter:none;padding:8px 2px;color:#243a4c}
+body.theme-light .premium-side:first-child{grid-column:2;grid-row:1}
+body.theme-light .premium-side:last-child{grid-column:3;grid-row:1}
+body.theme-light .premium-side small{color:#38576a;font-size:10px}
+body.theme-light .premium-side strong{color:#1c3346;font-size:12px}
+body.theme-light .premium-range{background:rgba(255,255,255,.75)!important;border-color:#dce3e8;color:#2f5167;margin-top:13px!important}
+body.theme-light .premium-nav{margin-top:0;background:transparent;border:0;box-shadow:none;gap:7px}
+body.theme-light .premium-nav button,body.theme-light .premium-nav button.secondary{background:#ffffffad;border:1px solid #e3e7ec;border-radius:18px;color:#284151;box-shadow:0 5px 14px #a2b1b740}
+body.theme-light .premium-nav button:not(.secondary){background:linear-gradient(145deg,#95c5e9,#5283ac);color:#fff;border-color:#b2eaff;box-shadow:0 0 14px #5c9bc8}
+body.theme-light .premium-recent{border-radius:23px;padding:13px;background:#ffffff91;border:1px solid #d9e0e7}
+body.theme-light .premium-recent-heading strong{color:#24384b}
+body.theme-light .premium-recent-item{background:#ffffffce;border-color:#e5e8ec;box-shadow:0 2px 13px #b8c5d13d}
+body.theme-light .premium-monthly{background:#ffffffb9;border-color:#d1dce5;color:#2b4b60;margin-top:15px}
+body.theme-light .premium-monthly-heading,body.theme-light .premium-monthly-grid strong{color:#1b3a4f}
+body.theme-light .premium-monthly-grid span{color:#57778a}
+body.theme-light .premium-monthly-grid>div{border-color:#c1d0da}
+@media(max-width:390px){
+.premium-top{min-height:570px!important}.premium-hero{grid-template-columns:minmax(0,1fr) minmax(138px,1.54fr) minmax(0,1fr)!important;gap:5px!important;margin-top:250px!important}.premium-side{padding:9px 5px!important}.premium-ring small{font-size:8px}.premium-theme-switch{top:96px}
+body.theme-light .premium-top{min-height:535px!important}body.theme-light .premium-hero{grid-template-columns:minmax(123px,1.15fr) minmax(0,1fr) minmax(0,1fr)!important;margin-top:226px!important}
+}
+@media(min-width:600px){.premium-top{padding-top:29px!important}.premium-top::before{height:400px!important}.premium-hero{margin-top:310px!important}.premium-side{min-height:155px!important}body.theme-light .premium-hero{margin-top:300px!important}}
+</style></head><body><header><h1>⚡ SHIMIX Charge</h1><div class="small">Suivi personnel Tesla • données conservées sur cet appareil</div><div id="appVersionDisplay" class="small" style="margin-top:5px;color:#81e6ba;font-weight:700">Version 2026.11.22.17</div></header><main><div class="premium-top"><div class="premium-brand"><span>SHIMIX</span> <em>Charge</em></div><div class="premium-subtitle">MON ESPACE TESLA</div><div class="premium-theme-switch" role="group" aria-label="Choisir le thème"><button type="button" id="quickDark" aria-pressed="true">◐ Sombre</button><button type="button" id="quickLight" aria-pressed="false">☀ Clair</button></div><div class="premium-hero"><div class="premium-side"><span class="premium-icon">◷</span><small>Dernière recharge</small><strong id="heroDate">—</strong><small>Station</small><strong id="heroStation">—</strong></div><div class="premium-ring"><div class="premium-ring-inner"><span class="premium-bolt">ϟ</span><small>Énergie rechargée</small><strong id="heroEnergy">—</strong><small>Dernière recharge enregistrée</small></div></div><div class="premium-side"><span class="premium-icon">ϟ</span><small>Prix TTC</small><strong id="heroCost">—</strong><small>Prix au kWh</small><strong id="heroUnit">—</strong></div></div><div class="premium-range"><span>▣</span><span>Recharges enregistrées · sans API Tesla</span><strong id="heroCount">—</strong></div></div>
 <nav class="nav premium-nav"><button id="mainTab"><span>ϟ</span>Recharges</button><button id="receiptsTab" class="secondary"><span>▤</span>Factures</button><button id="statsTab" class="secondary"><span>▥</span>Statistiques</button><button id="vehicleTab" class="secondary"><span>▱</span>Véhicule</button><button id="toolsTab" class="secondary"><span>⚙</span>Réglages</button></nav>
 <div class="premium-recent" id="premiumRecent"><div class="premium-recent-heading"><strong>Mes dernières recharges</strong><button id="premiumSeeAll" type="button">Voir tout ›</button></div><div id="premiumRecentItems"></div></div><div class="premium-monthly" id="premiumMonthly"><div class="premium-monthly-heading">▦ &nbsp; Ce mois</div><div class="premium-monthly-grid"><div><span>Énergie</span><strong id="premiumMonthKwh">—</strong></div><div><span>Dépenses</span><strong id="premiumMonthCost">—</strong></div><div><span>Recharges</span><strong id="premiumMonthCount">—</strong></div></div></div><div id="mainPage">
 <section><details class="fold-section" open><summary><span class="fold-title">Tableau de bord</span><span class="fold-indicator" aria-hidden="true"></span></summary><div class="fold-content"><label>Mois<select id="month"></select></label><div class="stats"><div class="stat">Distance<b id="totalKm">—</b></div><div class="stat">Énergie<b id="totalKwh">—</b></div><div class="stat">Dépenses<b id="totalCost">—</b></div><div class="stat">Prix moyen<b id="avgPrice">—</b></div><div class="stat">Coût / 100 km<b id="cost100">—</b></div><div class="stat">Consommation moyenne<b id="cons100">—</b><small>kWh / 100 km (énergie rechargée)</small></div></div></div></details></section>
@@ -458,7 +530,7 @@ $('file').onchange=async e=>{let file=e.target.files?.[0];if(!file)return;let st
 try{let content='',scanned=[];if(file.type.startsWith('image/')){status.textContent='Reconnaissance de la photo en cours…';content=await recognizeImage(file)}else if(file.type==='application/pdf'){let pdf=await readPdf(file);content=pdf.content;scanned=pdf.scanned;for(let i=0;i<scanned.length;i++){status.textContent='Reconnaissance de la page scannée '+(i+1)+'/'+scanned.length+'…';content+='\\n'+await recognizeImage(scanned[i])}}else throw Error('Format non pris en charge');let found=parseText(content),fields=Object.entries(found).filter(x=>x[1]).map(x=>x[0]);let debug=$('importDebug');if(debug){debug.hidden=false;$('importRaw').value=content.slice(0,12000);$('importFields').textContent='Champs détectés : '+(fields.join(', ')||'aucun');}status.textContent=fields.length?'Informations extraites : '+fields.join(', ')+'. Vérifie et corrige avant de valider.':'Aucune information reconnue avec certitude. Complète les champs manuellement.';if(file.size>700000)status.textContent+=' Fichier trop volumineux pour être conservé (limite 700 Ko).'}catch(err){status.textContent='Reconnaissance indisponible : '+err.message+'. Complète les champs manuellement.'}};$('copyImport').onclick=()=>{let txt=$('importFields').textContent+'\n'+$('importRaw').value;navigator.clipboard?.writeText(txt).then(()=>$('importFields').textContent+=' — Copié').catch(()=>{$('importRaw').select();document.execCommand('copy')})};render();resetRechargeForm();window.addEventListener('pageshow',e=>{if(e.persisted)resetRechargeForm()});
 
 // Mise à jour automatique : contrôle la version publiée sans effacer le stockage local.
-const APP_VERSION='2026-11-22-16';
+const APP_VERSION='2026-11-22-17';
 let updateCheckRunning=false,lastUpdateCheck=0;
 async function checkForUpdates(force=false){
  if(updateCheckRunning||!navigator.onLine||(!force&&document.hidden))return;
