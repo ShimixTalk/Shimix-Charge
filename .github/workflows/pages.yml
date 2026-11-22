@@ -1,7 +1,5 @@
 name: Publish SHIMIX Charge
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
